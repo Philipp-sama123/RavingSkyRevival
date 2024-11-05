@@ -26,6 +26,7 @@ public class Item {
 
     private Random randomValue;
 
+
     public Item(Texture itemTexture, boolean isGoodItem) {
         randomValue = new Random();
         killPlayer = false;
