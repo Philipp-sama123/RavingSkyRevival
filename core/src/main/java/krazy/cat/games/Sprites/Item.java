@@ -15,7 +15,7 @@ public class Item {
     private ArrayList<Integer> itemXs = new ArrayList<Integer>();
     private ArrayList<Integer> itemYs = new ArrayList<Integer>();
     private ArrayList<Rectangle> itemRectangles = new ArrayList<Rectangle>();
-
+    public ItemType itemType = ItemType.Coin;
     private Texture itemTexture;
 
     private boolean isGoodItem;
@@ -25,7 +25,6 @@ public class Item {
     public int itemCount;
 
     private Random randomValue;
-
 
     public Item(Texture itemTexture, boolean isGoodItem) {
         randomValue = new Random();
@@ -43,11 +42,20 @@ public class Item {
     }
 
     public void spawnItem() {
-        if (itemCount < RavingSky.COIN_SPAWN_FREQUENCY) {
-            itemCount++;
+        if (isGoodItem) {
+            if (itemCount < RavingSky.COIN_SPAWN_FREQUENCY) {
+                itemCount++;
+            } else {
+                itemCount = 0;
+                makeItem();
+            }
         } else {
-            itemCount = 0;
-            makeItem();
+            if (itemCount < RavingSky.BOMB_SPAWN_FREQUENCY) {
+                itemCount++;
+            } else {
+                itemCount = 0;
+                makeItem();
+            }
         }
     }
 
